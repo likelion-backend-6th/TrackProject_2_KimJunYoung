@@ -70,3 +70,25 @@ class PostTest(APITestCase):
         self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
 
     # follow한 사람들이 올린 게시물을 잘 확인할 수 있는지 테스트
+    def test_follow_post_list(self):
+        self.client.force_login(self.authorized_user2)
+        post_data = {
+            "title": "test title_uesr2",
+            "body": "test body_user2",
+        }
+        self.client.post("/blog/post/", post_data)
+
+        self.client.force_login(self.authorized_user1)
+        follow_data = {
+            "following": self.authorized_user2.id,
+        }
+        post_data = {
+            "title": "test title",
+            "body": "test body111",
+        }
+        self.client.post("/follow/", follow_data)
+        self.client.post("/blog/post/", post_data)
+
+        res: HttpResponse = self.client.get("/blog/post/following_post/")
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data[0]["owner"], self.authorized_user2.id)
