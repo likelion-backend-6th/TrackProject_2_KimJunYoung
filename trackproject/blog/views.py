@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.request import Request
 from django.contrib.auth.models import User
 from rest_framework.decorators import action
+from drf_spectacular.utils import extend_schema
 
 from .models import Post, Follow
 from .serializers import (
@@ -61,6 +62,14 @@ class PostViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_401_UNAUTHORIZED, data="Unauthorized")
 
         return super().destroy(request, *args, **kwargs)
+
+    @extend_schema(deprecated=True)
+    def update(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_400_BAD_REQUEST, data="Deprecated API")
+
+    @extend_schema(deprecated=True)
+    def partial_update(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_400_BAD_REQUEST, data="Deprecated API")
 
 
 class UserListView(generics.ListAPIView):
