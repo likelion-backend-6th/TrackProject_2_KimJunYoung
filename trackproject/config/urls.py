@@ -22,10 +22,12 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from django.urls import include
 
 from blog.urls import router as blog_router
+from blog import views
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("users/", views.UserListView.as_view()),
     path("blog/", include(blog_router.urls)),
     path("api-auth", include("rest_framework.urls")),
     # drf-spectacular

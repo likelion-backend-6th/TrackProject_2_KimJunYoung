@@ -1,10 +1,11 @@
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, generics
 from rest_framework.response import Response
 from rest_framework.request import Request
+from django.contrib.auth.models import User
 
 
 from .models import Post, Follow
-from .serializers import PostSerializer
+from .serializers import PostSerializer, UserSerializer
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -34,3 +35,13 @@ class PostViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_401_UNAUTHORIZED, data="Unauthorized")
 
         return super().destroy(request, *args, **kwargs)
+
+
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def list(self, request: Request, *args, **kwargs):
+        obj = User.objects.exclude(username=request.user)
+        serializer = UserSerializer(obj, many=True)
+        return Response(serializer.data)
