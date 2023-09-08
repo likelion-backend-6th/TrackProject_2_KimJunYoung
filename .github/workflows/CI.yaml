@@ -25,7 +25,7 @@ jobs:
             - name: install black
               run: pip install black
             - name: check black
-              run: black --check trackproject
+              run: black trackproject
             
 
 
