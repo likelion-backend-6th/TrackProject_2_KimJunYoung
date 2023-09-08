@@ -38,7 +38,7 @@ jobs:
     
     deploy:
         needs: build-push
-        name: deploy to staging
+        name: deploy
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@v3
