@@ -29,7 +29,7 @@ jobs:
             
 
 
-    build-push-test:
+    build-test-push:
         needs: lint
         name: build-push
         runs-on: ubuntu-latest
@@ -39,6 +39,7 @@ jobs:
             - name: test
               run: |
                 docker build -t track:test trackproject/
+                ls -al
                 docker run --name track-test -p 8000:8000 -d --env-file .envs/prod/django track:test
                 docker exec track-test python manage.py test
 
