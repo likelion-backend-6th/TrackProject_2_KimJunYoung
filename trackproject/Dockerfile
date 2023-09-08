@@ -16,12 +16,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . ${APP_HOME}
 
 # copy start script & run
-COPY ../script/start /start
+COPY ./script/start /start
 RUN sed -i  's/\r$//g' /start
 RUN chmod +x /start
 
 # copy start entrypoint & run
-COPY ../script/entrypoint /entrypoint
+COPY ./script/entrypoint /entrypoint
 RUN sed -i  's/\r$//g' /entrypoint
 RUN chmod +x /entrypoint
 

@@ -28,5 +28,4 @@ done
 
 >&2 echo "PostgreSQL is availalbe"
 
-# 뒤에 오는 명령어를 실행시키는것 (도커파일의 CMD)
 exec "$@"
