@@ -58,8 +58,3 @@ jobs:
                   context: trackproject
                   tags: ${{ env.IMAGE_TAG }}
                   push: true
-
-            - name: docker stop && rm
-              if: ${{ always() }}
-              run: |
-                docker stop track-test && docker rm track-test 
