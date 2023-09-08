@@ -18,6 +18,26 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
+    @action(detail=False, methods=["get"], url_name="my_post")
+    def my_post(self, request: Request, *args, **kwargs):
+        user = request.user
+        obj = Post.objects.filter(owner=user)
+        serializer = PostSerializer(obj, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=["get"], url_name="following_post")
+    def following_post(self, request: Request, *args, **kwargs):
+        user = request.user
+        follow = Follow.objects.filter(follower=user)
+        serializer = FollowSerializer(follow, many=True)
+        following_list = []
+        for data in serializer.data:
+            following_list.append(data["following"])
+
+        obj = Post.objects.filter(owner__in=following_list)
+        serializer = PostSerializer(obj, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
     def create(self, request: Request, *args, **kwargs):
         title = request.data.get("title")
         body = request.data.get("body")
