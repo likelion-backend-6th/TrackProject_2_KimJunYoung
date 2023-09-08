@@ -12,6 +12,9 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    def access_by_post(self, user: User):
+        return self.owner == user or user.is_superuser
+
 
 class Follow(models.Model):
     follower = models.ForeignKey(

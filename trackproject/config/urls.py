@@ -19,10 +19,15 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from django.urls import include
+
+from blog.urls import router as blog_router
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("blog/", include(blog_router.urls)),
+    path("api-auth", include("rest_framework.urls")),
     # drf-spectacular
     path("api/schema/", SpectacularAPIView.as_view(), name="api-schema"),
     path(
