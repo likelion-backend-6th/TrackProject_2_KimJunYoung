@@ -39,9 +39,8 @@ jobs:
             - name: test
               run: |
                 docker build -t track:test trackproject/
-                ls -al .envs/prod/django
-                cat .envs/prod/django
-                docker run --name track-test -p 8000:8000 -d --env-file .envs/prod/django track:test
+                export DB_HOST=${{ secrets.DB_HOST }}
+                docker run --name track-test -p 8000:8000 -d --env-file .envs/local/django track:test
                 docker exec track-test python manage.py test
 
             - name: set up docker buildx
