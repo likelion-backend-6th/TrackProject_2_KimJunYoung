@@ -5,11 +5,11 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "lion-lb-staging-19480416-c5464abf6647.kr.lb.naverncp.com",
+    "lion-lb-prod-19483051-7661c2c0d955.kr.lb.naverncp.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://lion-lb-staging-19480416-c5464abf6647.kr.lb.naverncp.com",
+    "http://lion-lb-prod-19483051-7661c2c0d955.kr.lb.naverncp.com",
 ]
 
 DATABASES = {
