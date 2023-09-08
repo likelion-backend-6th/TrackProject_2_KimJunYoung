@@ -5,7 +5,7 @@ on:
         branches:
           - 'main'
         paths:
-          - '.github/workflow/CD.yml'
+          - '.github/workflow/CD.yaml'
           - 'trackproject/**'
  
 env:
