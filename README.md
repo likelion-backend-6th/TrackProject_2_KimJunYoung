@@ -33,44 +33,44 @@
 - 유저
     - [x] 사용자 본인을 제외한 전체 사용자 목록을 확인할 수 있다.
     > method: GET <br>
-    > API: [/users/](http://lion-lb-staging-19480416-c5464abf6647.kr.lb.naverncp.com/api/docs/users/)
+    > API: [/users/](http://lion-lb-prod-19483051-7661c2c0d955.kr.lb.naverncp.com/users/)
 
 - 게시글
     - 사용자는 게시글을 올릴 수 있다.
     > method: POST <br>
-    > [/blog/post/](http://lion-lb-staging-19480416-c5464abf6647.kr.lb.naverncp.com/api/docs/blog/post/)
+    > [/blog/post/](http://lion-lb-prod-19483051-7661c2c0d955.kr.lb.naverncp.com/blog/post/)
 
     - 사용자는 본인의 게시물을 모아볼 수 있다.
     > method: GET <br>
-    > [/blog/post/my-post/](http://lion-lb-staging-19480416-c5464abf6647.kr.lb.naverncp.com/api/docs/blog/post/my-post/)
+    > [/blog/post/my-post/](http://lion-lb-prod-19483051-7661c2c0d955.kr.lb.naverncp.com/blog/post/my-post/)
 
     - 사용자는 본인의 게시물을 수정하거나, 삭제할 수 있다.
     > method: PUT <br>
-    > [/blog/post/{id:int}](http://lion-lb-staging-19480416-c5464abf6647.kr.lb.naverncp.com/api/docs/blog/post/10)
+    > [/blog/post/{id:int}](http://lion-lb-prod-19483051-7661c2c0d955.kr.lb.naverncp.com/blog/post/10)
 
     > method: DELETE <br>
-    > [/blog/post/{id:int}](http://lion-lb-staging-19480416-c5464abf6647.kr.lb.naverncp.com/api/docs/blog/post/10)
+    > [/blog/post/{id:int}](http://lion-lb-prod-19483051-7661c2c0d955.kr.lb.naverncp.com/blog/post/10)
 
 - follow
     - 사용자는 다른 사용자를 follow(unfollow)할 수 있다.
     > method: POST <br>
-    > [/follow/](http://lion-lb-staging-19480416-c5464abf6647.kr.lb.naverncp.com/api/docs/follow/)
+    > [/follow/](http://lion-lb-prod-19483051-7661c2c0d955.kr.lb.naverncp.com/follow/)
 
     > method: POST <br>
-    > [/follow/unfollow/{username}/](http://lion-lb-staging-19480416-c5464abf6647.kr.lb.naverncp.com/api/docs/follow/unfollow/test1)
+    > [/follow/unfollow/{username}/](http://lion-lb-prod-19483051-7661c2c0d955.kr.lb.naverncp.com/follow/unfollow/test1)
 
 
     - 사용자는 follow한 사람들 목록을 확인할 수 있다.
     > method: GET <br>
-    > [/follow/follower/](http://lion-lb-staging-19480416-c5464abf6647.kr.lb.naverncp.com/api/docs/follow/follower)
+    > [/follow/follower/](http://lion-lb-prod-19483051-7661c2c0d955.kr.lb.naverncp.com/follow/follower)
 
     - 사용자는 나를 follow하고 있는 사람들 목록을 확인할 수 있다.
     > method: GET <br>
-    > [/follow/following/](http://lion-lb-staging-19480416-c5464abf6647.kr.lb.naverncp.com/api/docs/follow/following)
+    > [/follow/following/](http://lion-lb-prod-19483051-7661c2c0d955.kr.lb.naverncp.com/follow/following)
 
     - 사용자는 follow한 사람들이 올린 게시물을 모아볼 수 있다.
     > method: GET <br>
-    > [/blog/post/following-post/](http://lion-lb-staging-19480416-c5464abf6647.kr.lb.naverncp.com/api/docs/follow/follower)
+    > [/blog/post/following-post/](http://lion-lb-prod-19483051-7661c2c0d955.kr.lb.naverncp.com/follow/follower)
 
 
 ### 3. 더미데이터 추가
