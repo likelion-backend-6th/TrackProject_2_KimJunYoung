@@ -1,5 +1,4 @@
 from rest_framework.test import APITestCase
-from django.urls import reverse
 from rest_framework import status
 from django.http import HttpResponse
 
@@ -18,8 +17,6 @@ class PostTest(APITestCase):
             "body": "test body",
             "owner": cls.authorized_user1,
         }
-
-        cls.follow_data = {"follower": cls.authorized_user1, "following": cls.superuser}
 
     # 전체 사용자 목록에서 자신을 제외한 목록이 잘 나오는지 테스트
     def test_user_list_without_self(self):
@@ -59,4 +56,17 @@ class PostTest(APITestCase):
         self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
 
     # follow / unfollow 기능이 잘 작동하는지 테스트
+    def test_follow_unfollow(self):
+        self.client.force_login(self.authorized_user1)
+        follow_data = {
+            "following": self.authorized_user2.id,
+        }
+        res: HttpResponse = self.client.post("/follow/", follow_data)
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+
+        res: HttpResponse = self.client.delete(
+            f"/follow/unfollow/{self.authorized_user2}/"
+        )
+        self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
+
     # follow한 사람들이 올린 게시물을 잘 확인할 수 있는지 테스트
