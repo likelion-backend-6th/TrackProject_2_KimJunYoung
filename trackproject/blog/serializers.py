@@ -17,3 +17,28 @@ class UserSerializer(serializers.ModelSerializer):
             "username",
         ]
         read_only_fields = ("username",)
+
+
+class FollowSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Follow
+        fields = "__all__"
+        read_only_fields = ("follower", "created_at")
+
+
+class FollowerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Follow
+        fields = [
+            "following",
+        ]
+        read_only_fields = ("follower", "following", "created_at")
+
+
+class FollowingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Follow
+        fields = [
+            "follower",
+        ]
+        read_only_fields = ("follower", "following", "created_at")

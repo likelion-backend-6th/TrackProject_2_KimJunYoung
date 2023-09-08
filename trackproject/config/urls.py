@@ -29,6 +29,13 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("users/", views.UserListView.as_view()),
     path("blog/", include(blog_router.urls)),
+    path("follow/", views.FollowViewSet.as_view({"post": "create"})),
+    path(
+        "follow/unfollow/<str:username>/",
+        views.FollowViewSet.as_view({"delete": "destroy"}),
+    ),
+    path("follow/follower/", views.FollowViewSet.as_view({"get": "follower"})),
+    path("follow/following/", views.FollowViewSet.as_view({"get": "following"})),
     path("api-auth", include("rest_framework.urls")),
     # drf-spectacular
     path("api/schema/", SpectacularAPIView.as_view(), name="api-schema"),
