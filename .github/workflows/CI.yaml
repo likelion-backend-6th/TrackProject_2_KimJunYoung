@@ -39,7 +39,7 @@ jobs:
             - name: test
               run: |
                 docker build -t track:test trackproject/
-                docker run --name track-test -p 8000:8000 -d --env-file .envs/local/django track:test
+                docker run --name track-test -p 8000:8000 -d --env-file .envs/prod/django track:test
                 docker exec track-test python manage.py test
 
             - name: set up docker buildx
