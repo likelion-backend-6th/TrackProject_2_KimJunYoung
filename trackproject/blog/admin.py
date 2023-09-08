@@ -9,4 +9,4 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Follow)
 class FollowAdmin(admin.ModelAdmin):
-    list_display = ("follower", "following", "created_at", "updated_at")
+    list_display = ("follower", "following", "created_at")
