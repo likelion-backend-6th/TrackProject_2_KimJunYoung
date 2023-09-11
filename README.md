@@ -5,6 +5,39 @@
 
 ---
 
+<br>
+
+### 0. 환경 및 버전
+
+<br>
+
+언어
+- Python: 3.11.3
+
+<br>
+
+라이브러리
+- Django: 4.2.4
+- djangorestframework: 3.14.0
+- drf-spectacular: 0.26.4
+- psycopg2-binary: 2.9.7
+- gunicorn: 21.2.0
+
+<br>
+
+클라우드
+- backend-server: ubuntu 20.04
+- db-server: ubuntu 20.04
+
+<br>
+
+도커
+- Docker: 24.0.5
+- backend-image: python-3.11-alpine
+- db-image: postgresql-13
+
+<br>
+
 ### 1. 백엔드 DB 설계
 
 - [x] Post
@@ -26,6 +59,7 @@
 |following|INTEGER|FOREIGN KEY User, NOT NULL|
 |created_at|DATETIME|auto_now_add|
 
+<br>
 
 ### 2. 백엔드 API 개발
 
@@ -72,11 +106,14 @@
     > method: GET <br>
     > [/blog/post/following-post/](http://lion-lb-prod-19483051-7661c2c0d955.kr.lb.naverncp.com/follow/follower)
 
+<br>
 
 ### 3. 더미데이터 추가
 
 - [x] 사용자 5명 이상
 - [x] 사용자당 게시글 3개 이상
+
+<br>
 
 ### 4. 테스트 코드 작성
 
@@ -96,6 +133,9 @@
 
 - [x] Github actions로 구현
 - [x] push가 됐을때, 테스트코드를 실행하여, 테스트가 정상 작동하는지 확인하고, 정상 작동하면, 서버에 새 버전을 배포
+
+
+<br><br>
 
 ## 도전 미션 개요
 
