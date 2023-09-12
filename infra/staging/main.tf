@@ -15,3 +15,14 @@ provider "ncloud" {
   site = "PUBLIC"
   support_vpc = true
 }
+
+locals {
+  env = "staging"
+}
+
+module "network" {
+  source = "../modules/network"
+  NCP_ACCESS_KEY = var.NCP_ACCESS_KEY
+  NCP_SECRET_KEY = var.NCP_SECRET_KEY
+  env = local.env
+}
