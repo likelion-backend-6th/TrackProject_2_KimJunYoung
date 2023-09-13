@@ -73,7 +73,16 @@ module "db_server" {
     POSTGRES_PASSWORD = var.POSTGRES_PASSWORD
     POSTGRES_PORT = var.POSTGRES_PORT
   }
+}
 
+module "loadBalancer" {
+  source = "../modules/lb"
+  NCP_ACCESS_KEY = var.NCP_ACCESS_KEY
+  NCP_SECRET_KEY = var.NCP_SECRET_KEY
+  env = local.env
+  lb_subnet_no = module.network.lb_subnet_no
+  vpc_no = module.network.vpc_no
+  be_instance_no = module.be_server.instance_no
 }
 
 resource "ncloud_public_ip" "be" {

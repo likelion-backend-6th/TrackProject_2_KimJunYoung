@@ -5,3 +5,7 @@ output "be_ip" {
 output "db_ip" {
   value = ncloud_public_ip.db.public_ip
 }
+
+output "lb_domain" {
+  value = module.loadBalancer.lb-domain
+}
