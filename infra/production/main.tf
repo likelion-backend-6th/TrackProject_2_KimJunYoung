@@ -17,7 +17,7 @@ provider "ncloud" {
 }
 
 locals {
-  env = "staging"
+  env = "prod"
 }
 
 module "network" {
