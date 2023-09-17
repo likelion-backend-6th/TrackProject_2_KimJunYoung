@@ -11,10 +11,16 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    is_following = serializers.SerializerMethodField()
+
+    def get_is_following(self, obj):
+        return None
+
     class Meta:
         model = User
         fields = [
             "username",
+            "is_following",
         ]
         read_only_fields = ("username",)
 

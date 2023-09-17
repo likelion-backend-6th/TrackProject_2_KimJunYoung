@@ -78,6 +78,11 @@ class UserListView(generics.ListAPIView):
     def list(self, request: Request, *args, **kwargs):
         obj = User.objects.exclude(username=request.user)
         serializer = UserSerializer(obj, many=True)
+        for data in serializer.data:
+            data["is_following"] = Follow.objects.filter(
+                follower=request.user,
+                following=User.objects.get(username=data["username"]),
+            ).exists()
         return Response(serializer.data)
 
 
