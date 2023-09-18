@@ -16,7 +16,7 @@ from .serializers import (
 
 
 class PostViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.all()
+    queryset = Post.objects.filter(is_hidden=False)
     serializer_class = PostSerializer
 
     @action(detail=False, methods=["get"], url_name="my_post")
@@ -35,15 +35,23 @@ class PostViewSet(viewsets.ModelViewSet):
         for data in serializer.data:
             following_list.append(data["following"])
 
-        obj = Post.objects.filter(owner__in=following_list)
+        obj = Post.objects.filter(owner__in=following_list, is_hidden=False)
         serializer = PostSerializer(obj, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # def list(self, request, *args, **kwargs):
+    #     obj = Post.objects.filter(is_hidden=False)
+    #     serializer = PostSerializer(obj, many=True)
+    #     return super().list(request, *args, **kwargs)
 
     def create(self, request: Request, *args, **kwargs):
         title = request.data.get("title")
         body = request.data.get("body")
+        is_hidden = request.data.get("is_hidden")
         owner = request.user
-        post = Post.objects.create(title=title, body=body, owner=owner)
+        post = Post.objects.create(
+            title=title, body=body, owner=owner, is_hidden=is_hidden
+        )
         serializer = PostSerializer(post)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)

@@ -8,6 +8,8 @@ class Post(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_hidden = models.BooleanField(default=False)
+    image_url = models.URLField(null=True, blank=True)
 
     def __str__(self):
         return self.title
