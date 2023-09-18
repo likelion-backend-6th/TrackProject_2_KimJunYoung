@@ -7,7 +7,21 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = "__all__"
+        read_only_fields = ("id", "owner", "created_at", "updated_at")
+
+
+class PostUploadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = [
+            "title",
+            "body",
+            "is_hidden",
+            "image",
+        ]
         read_only_fields = ("owner", "created_at", "updated_at")
+
+    image = serializers.ImageField(required=False)
 
 
 class UserSerializer(serializers.ModelSerializer):
