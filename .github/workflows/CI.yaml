@@ -10,6 +10,7 @@ on:
             - 'trackproject/**'
 
 env:
+    IMAGE: ${{ vars.NCR_REGISTRY }}/trackmission
     IMAGE_TAG: ${{ vars.NCR_REGISTRY }}/trackmission:latest
 
 jobs:
@@ -52,10 +53,17 @@ jobs:
                 registry: ${{ vars.NCR_REGISTRY }}
                 username: ${{ secrets.NCR_ACCESS_KEY }}
                 password: ${{ secrets.NCR_SECRET_KEY }}
+
+            - name: Get current timestamp
+              id: timestamp
+              run: echo "timestamp=$(date '+%s')" >> "$GITHUB_OUTPUT"
   
             - name: bulid and push
               uses: docker/build-push-action@v4
               with:
                   context: trackproject
-                  tags: ${{ env.IMAGE_TAG }}
+                  tags: ${{ env.IMAGE_TAG }}, "${{ env.IMAGE }}:${{ steps.timestamp.outputs.timestamp }}"
                   push: true
+
+        outputs:
+            output1: ${{ steps.timestamp.outputs.timestamp }}
