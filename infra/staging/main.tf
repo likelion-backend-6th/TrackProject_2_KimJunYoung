@@ -3,6 +3,10 @@ terraform {
     ncloud = {
       source = "NaverCloudPlatform/ncloud"
     }
+    ssh = {
+      source = "loafoe/ssh"
+      version = "2.6.0"
+    }
   }
   required_version = ">= 0.13"
 }
@@ -14,6 +18,10 @@ provider "ncloud" {
   region = "KR"
   site = "PUBLIC"
   support_vpc = true
+}
+
+provider "ssh" {
+  
 }
 
 locals {
@@ -96,4 +104,48 @@ resource "ncloud_public_ip" "db" {
 data "ncloud_server_products" "sm" {
   server_image_product_code = "SW.VSVR.OS.LNX64.UBNTU.SVR2004.B050"
   product_code = "SVR.VSVR.HICPU.C002.M004.NET.SSD.B050.G002"
+}
+
+resource "ssh_resource" "db_init" {
+  depends_on = [ module.db_server ]
+  when = "create"
+
+  host         = ncloud_public_ip.db.public_ip
+  user         = "lion"
+  password = var.password
+
+  timeout     = "2m"
+  retry_delay = "5s"
+
+  file {
+    source = "${path.module}/script/set_db_server.sh"
+    destination = "/home/lion/set_db_server.sh"
+    permissions = "0700"
+  }
+
+  commands = [
+    "/home/lion/set_db_server.sh"
+  ]
+}
+
+resource "ssh_resource" "be_init" {
+  depends_on = [ module.be_server ]
+  when = "create"
+
+  host         = ncloud_public_ip.be.public_ip
+  user         = "lion"
+  password = var.password
+
+  timeout     = "2m"
+  retry_delay = "5s"
+
+  file {
+    source = "${path.module}/script/set_be_server.sh"
+    destination = "set_be_server.sh"
+    permissions = "0700"
+  }
+
+  commands = [
+    "/home/lion/set_be_server.sh"
+  ]
 }
