@@ -3,6 +3,8 @@ name: CI
 on:
     pull_request:
     push:
+        tags:
+          - "*.*.*"
         branches:
             - 'main'
         paths:
@@ -57,13 +59,19 @@ jobs:
             - name: Get current timestamp
               id: timestamp
               run: echo "timestamp=$(date '+%s')" >> "$GITHUB_OUTPUT"
-  
-            - name: bulid and push
+
+            - name: bulid and push refs/heads
+              if: startsWith(github.ref, 'refs/heads')
               uses: docker/build-push-action@v4
               with:
                   context: trackproject
                   tags: ${{ env.IMAGE_TAG }},"${{ env.IMAGE }}:${{ steps.timestamp.outputs.timestamp }}"
                   push: true
 
-        outputs:
-            output1: ${{ steps.timestamp.outputs.timestamp }}
+            - name: bulid and push refs/tags
+              if: startsWith(github.ref, 'refs/tags')
+              uses: docker/build-push-action@v4
+              with:
+                  context: trackproject
+                  tags: ${{ env.IMAGE_TAG }},"${{ env.IMAGE }}:${{ github.ref_name }}"
+                  push: true
