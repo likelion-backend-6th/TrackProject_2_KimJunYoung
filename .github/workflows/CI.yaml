@@ -62,7 +62,7 @@ jobs:
               uses: docker/build-push-action@v4
               with:
                   context: trackproject
-                  tags: ${{ env.IMAGE_TAG }}, "${{ env.IMAGE }}:${{ steps.timestamp.outputs.timestamp }}"
+                  tags: ${{ env.IMAGE_TAG }},"${{ env.IMAGE }}:${{ steps.timestamp.outputs.timestamp }}"
                   push: true
 
         outputs:
