@@ -38,4 +38,4 @@ jobs:
                 docker run -p 8000:8000 -d \
                 --env-file /home/lion/.env \
                 --name trackmission \
-                devops6th-cr.kr.ncr.ntruss.com/trackmission:latest
+                devpos6th.kr.ncr.ntruss.com/trackmission:latest
