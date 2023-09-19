@@ -4,12 +4,12 @@ on:
     pull_request:
     push:
         tags:
-          - "*.*.*"
-        # branches:
-        #     - 'main'
-        # paths:
-        #     - '.github/workflows/**'
-        #     - 'trackproject/**'
+            - "*.*.*"
+        branches:
+            - 'main'
+        paths:
+            - '.github/workflows/**'
+            - 'trackproject/**'
 
 env:
     IMAGE: ${{ vars.NCR_REGISTRY }}/trackmission
