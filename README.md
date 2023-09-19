@@ -61,7 +61,7 @@ k8s
     - [x] 게시물에 사진을 추가할 수 있다.
     - |method|endpoint|example|
         |------|------|------|
-        |GET|[/blog/post](http://sns-lb-staging-19617966-7a5b35a9d8d7.kr.lb.naverncp.com/blog/post/)|{<br>"title": "string",<br>"body": "string",<br>"is_hidden": bool,<br> "image":"file"<br>}|
+        |POST|[/blog/post](http://sns-lb-staging-19617966-7a5b35a9d8d7.kr.lb.naverncp.com/blog/post/)|{<br>"title": "string",<br>"body": "string",<br>"is_hidden": bool,<br> "image":"file"<br>}|
 <br>
 
 ### 2. terraform 작성
