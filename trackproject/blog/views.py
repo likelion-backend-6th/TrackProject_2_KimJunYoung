@@ -45,11 +45,6 @@ class PostViewSet(viewsets.ModelViewSet):
         serializer = PostSerializer(obj, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    # def list(self, request, *args, **kwargs):
-    #     obj = Post.objects.filter(is_hidden=False)
-    #     serializer = PostSerializer(obj, many=True)
-    #     return super().list(request, *args, **kwargs)
-
     def get_serializer_class(self):
         if self.action == "create":
             return PostUploadSerializer
