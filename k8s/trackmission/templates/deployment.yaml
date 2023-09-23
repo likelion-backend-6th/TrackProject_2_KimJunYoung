@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "trackmission.fullname" . }}
+  labels:
+    {{- include "trackmission.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      {{- include "trackmission.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "trackmission.selectorLabels" . | nindent 8 }}
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: {{ include "trackmission.fullname" . }}
+          image: {{ .Values.image.name }}:{{ .Values.image.tag | default .Chart.AppVersion}}
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: {{ include "trackmission.fullname" . }}
+            - secretRef:
+                name: {{ include "trackmission.db.fullname" . }}
+            - configMapRef:
+                name: {{ include "trackmission.fullname" . }}
+          ports:
+            - containerPort: {{ .Values.containerPort.django }}
+          readinessProbe:
+            httpGet:
+              path: /health/
+              port: 8000
+            initialDelaySeconds: 5
